@@ -60,7 +60,7 @@
 						<td th:text="${user.roles}">Roles</td>
 						<td th:text="${user.gender}">Gender</td>
 						<td th:text="${user.department}">Department</td>
-						<td th:text="${user.organization.organization_name}">Organization Name</td>
+						<td th:text="${user.category.organization_name}">Organization Name</td>
 
 						<td>
 							<a th:if="${user.id} != ${loggedUser.id}" th:href="@{'/users/edit/' + ${user.id}}"

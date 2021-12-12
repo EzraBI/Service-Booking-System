@@ -29,8 +29,8 @@
 	<div >
 		<div class="main-section">
 
-			<h3 > Users in: <a style="color: blue" th:text="${loggedUser.organization.organization_name}"></a></h3>
-<!--			<h5><b>Users in:<h5 th:text="${loggedUser.organization.organization_name}"></h5></b></th:text></b></h5>-->
+			<h3 > Users in: <a style="color: blue" th:text="${loggedUser.category.organization_name}"></a></h3>
+<!--			<h5><b>Users in:<h5 th:text="${loggedUser.category.organization_name}"></h5></b></th:text></b></h5>-->
 
 			<div>
 				<table class="My_table">
@@ -53,7 +53,7 @@
 					</thead>
 					<tbody>
 					<tr th:each="user: ${listUsers}"
-						th:if="${user.organization.organization_id} == ${loggedUser.organization.organization_id}">
+						th:if="${user.category.organization_id} == ${loggedUser.category.organization_id}">
 						<!--						<td th:text="${user.id}">User ID</td>-->
 						<td th:text="${user.email}">E-mail</td>
 						<td th:text="${user.firstName}">First Name</td>
@@ -62,7 +62,7 @@
 						<td th:text="${user.roles}">Roles</td>
 						<td th:text="${user.gender}">Gender</td>
 						<td th:text="${user.department}">Department</td>
-						<!--						<td th:text="${user.organization.organization_name}">Organization Name</td>-->
+						<!--						<td th:text="${user.category.organization_name}">Organization Name</td>-->
 
 						<td>
 							<a th:if="${user.id} != ${loggedUser.id}" th:href="@{'/users/edit/' + ${user.id}}"

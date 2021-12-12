@@ -1,7 +1,7 @@
 package net.salon.booking.User;
 
-import net.salon.booking.Organization.Organization;
-import net.salon.booking.Organization.OrganizationRepository;
+import net.salon.booking.Category.Category;
+import net.salon.booking.Category.CategoryRepository;
 import net.salon.booking.Role.Role;
 import net.salon.booking.Role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class UserService {
 	RoleRepository roleRepo;
 
 	@Autowired
-	private OrganizationRepository organizationRepository;
+	private CategoryRepository categoryRepository;
 	
 	@Autowired PasswordEncoder passwordEncoder;
 
@@ -61,12 +61,12 @@ public class UserService {
 	}
 
 
-	public Organization get(Integer organization_id) {
-		return organizationRepository.findById(organization_id).get();
+	public Category get(Integer organization_id) {
+		return categoryRepository.findById(organization_id).get();
 	}
 
-	public List<Organization> listOrganizations() {
-		return organizationRepository.findAll();
+	public List<Category> listOrganizations() {
+		return categoryRepository.findAll();
 	}
 	
 	public void save(User user) {

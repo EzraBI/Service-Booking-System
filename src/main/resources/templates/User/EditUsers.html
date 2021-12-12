@@ -108,9 +108,9 @@
 				<div class="form-group row">
 					<label class="label">Organizations: </label>
 					<div class="col-8">
-						<th:block th:each="organization: ${listOrganization}">
-							<input type="radio" th:field="*{organization}"
-								   th:text="${organization.organization_name}" th:value="${organization.organization_id}" class="m-2" />
+						<th:block th:each="category: ${listCategory}">
+							<input type="radio" th:field="*{category}"
+								   th:text="${category.organization_name}" th:value="${category.organization_id}" class="m-2" />
 						</th:block>
 					</div>
 				</div>

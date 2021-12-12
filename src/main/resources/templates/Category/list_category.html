@@ -48,13 +48,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="organization: ${listOrg}">
-                        <!--                        <td th:text="${organization.organization_id}">Organization ID</td>-->
-                        <td th:text="${organization.organization_name}">Organization Name</td>
-                        <!--                        <td th:text="${organization.boardrooms}">Boardroom Name</td>-->
+                    <tr th:each="category: ${listOrg}">
+                        <!--                        <td th:text="${category.organization_id}">Organization ID</td>-->
+                        <td th:text="${category.organization_name}">Organization Name</td>
+                        <!--                        <td th:text="${category.boardrooms}">Boardroom Name</td>-->
 
                         <td sec:authorize="hasAnyAuthority('ADMIN','SUPER_USER')">
-                            <a th:href="@{'/edit_org/' + ${organization.organization_id}}"
+                            <a th:href="@{'/edit_org/' + ${category.organization_id}}"
                                onclick="return confirm('Are you sure you want to edit the Organization details?')">
                                 <button style='font-size:16px;color:blue'>Edit
                                     <i class='fas fa-edit'></i>
@@ -63,7 +63,7 @@
                         </td>
 
                         <td sec:authorize="hasAnyAuthority('ADMIN','SUPER_USER')">
-                            <a th:href="@{'/delete_org/' + ${organization.organization_id}}"
+                            <a th:href="@{'/delete_org/' + ${category.organization_id}}"
                                onclick="return confirm('Are you sure you want to delete the Organization?')">
                                 <button style='font-size:16px;color:red'>Delete
                                     <i class='far fa-trash-alt'></i>

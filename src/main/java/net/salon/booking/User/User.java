@@ -1,6 +1,6 @@
 package net.salon.booking.User;
 
-import net.salon.booking.Organization.Organization;
+import net.salon.booking.Category.Category;
 import net.salon.booking.Role.Role;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ public class User {
 	@Column(name = "last_name",  length = 20)
 	private String lastName;
 
-	@Column(name = "phone", nullable = false, length = 20)
+	@Column(name = "phone", length = 20)
 	private String phone;
 
 	@Column(name = "gender", length = 20)
@@ -52,7 +52,7 @@ public class User {
 	@ManyToOne
 	@NotBlank(message = "Organization is required")
 	@JoinColumn(name = "organization_id")
-	private Organization organization;
+	private Category category;
 
 	public Long getId() {
 		return id;
@@ -122,12 +122,12 @@ public class User {
 		this.roles.add(role);
 	}
 
-	public Organization getOrganization() {
-		return organization;
+	public Category getOrganization() {
+		return category;
 	}
 
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
+	public void setOrganization(Category category) {
+		this.category = category;
 	}
 
 	public String getResetPasswordToken() {

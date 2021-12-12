@@ -33,7 +33,7 @@
                           method="post"
                           onSubmit="if(!confirm('Do you want to Save Organization?')){return false;}"
                           style="max-width: 600px; margin: 0 auto;"
-                          th:object="${organization}">
+                          th:object="${category}">
 
                         <div th:if="${error != null}">
                             <p class="text-danger">[[${error}]]</p>

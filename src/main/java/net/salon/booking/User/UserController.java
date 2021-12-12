@@ -1,7 +1,7 @@
 package net.salon.booking.User;
 
-import net.salon.booking.Organization.Organization;
-import net.salon.booking.Organization.OrganizationService;
+import net.salon.booking.Category.Category;
+import net.salon.booking.Category.CategoryService;
 import net.salon.booking.Role.Role;
 import net.salon.booking.Role.RoleRepository;
 import net.salon.booking.Role.RoleService;
@@ -23,7 +23,7 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private OrganizationService organizationService;
+	private CategoryService categoryService;
 
 	@Autowired
 	private RoleService roleService;
@@ -54,8 +54,8 @@ public class UserController {
 		List<Role> listRoles = service.listRoles();
 		model.addAttribute("listRoles", listRoles);
 
-		List<Organization> listOrganization = organizationService.listOrganization();
-		model.addAttribute("listOrganization", listOrganization);
+		List<Category> listCategory = categoryService.listOrganization();
+		model.addAttribute("listOrganization", listCategory);
 
 		return "User/signup_form";
 	}
@@ -124,8 +124,8 @@ public class UserController {
 		List<Role> listRoles = service.listRoles();
 		model.addAttribute("listRoles", listRoles);
 
-		List<Organization> listOrganization = organizationService.listOrganization();
-		model.addAttribute("listOrganization", listOrganization);
+		List<Category> listCategory = categoryService.listOrganization();
+		model.addAttribute("listOrganization", listCategory);
 
 
 		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
@@ -162,7 +162,7 @@ public class UserController {
 
 		int users = service.noOfUsers();
 
-		int organizations = organizationService.noOfOrg();
+		int organizations = categoryService.noOfOrg();
 
 
 		model.addAttribute("noOfUsers", users);
@@ -196,8 +196,8 @@ public class UserController {
 		String email = loggedUser.getUsername();
 		User user = service.getUserByEmail(email);
 
-		List<Organization> listOrganization = organizationService.listOrganization();
-		model.addAttribute("listOrganization", listOrganization);
+		List<Category> listCategory = categoryService.listOrganization();
+		model.addAttribute("listOrganization", listCategory);
 
 
 		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
@@ -216,8 +216,8 @@ public class UserController {
 		String email = loggedUser.getUsername();
 		User user = service.getUserByEmail(email);
 
-		List<Organization> listOrganization = organizationService.listOrganization();
-		model.addAttribute("listOrganization", listOrganization);
+		List<Category> listCategory = categoryService.listOrganization();
+		model.addAttribute("listOrganization", listCategory);
 
 
 		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
@@ -237,8 +237,8 @@ public class UserController {
 
 		loggedUser.setPassword(user.getPassword());
 
-		List<Organization> listOrganization = organizationService.listOrganization();
-		model.addAttribute("listOrganization", listOrganization);
+		List<Category> listCategory = categoryService.listOrganization();
+		model.addAttribute("listOrganization", listCategory);
 
 
 		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
