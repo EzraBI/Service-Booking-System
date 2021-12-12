@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SMS Version 1.0</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <h3>Add Roles:- Enter Here</h3>
+
+    <br />
+    <br />
+
+    <form th:action="@{/save_role}" method="post"
+          onSubmit="if(!confirm('Do you want to Save User?'))
+    {return false;}"
+          style="max-width: 600px; margin: 0 auto;"
+          th:object="${edit_roles}">
+
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">Role Id:</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" th:field="*{id}" required readonly/>
+                </div>
+            </div>
+
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Role Name: </label>
+            <div class="col-8">
+                <input type="text" th:field="*{name}" class="form-control"
+                       required minlength="2" maxlength="20"/>
+            </div>
+        </div>
+
+
+
+        <div>
+                <button type="submit" class="btn btn-primary">Edit Role</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

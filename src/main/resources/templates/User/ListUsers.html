@@ -1,0 +1,119 @@
+<!--<div  sec:authorize="hasAnyAuthority('ADMIN')" >-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Office Meeting Planner </title>
+	<!--	<link rel="stylesheet" type="text/css" href="css/reset.css">-->
+	<!--	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">-->
+	<link th:href="@{/css/welcome/bootstrap.css}" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/menuresponsive.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--    Footer Social Media Icons-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous" />
+
+
+</head>
+<body style="background-color: #b0e0e6">
+
+<!--Navbar-->
+<div th:replace="admin/admin::navbar"></div>
+<!--Navbar-->
+
+<div>
+	<div >
+		<div class="main-section">
+
+			<h3 > Users in: <a style="color: blue" th:text="${loggedUser.organization.organization_name}"></a></h3>
+<!--			<h5><b>Users in:<h5 th:text="${loggedUser.organization.organization_name}"></h5></b></th:text></b></h5>-->
+
+			<div>
+				<table class="My_table">
+					<thead class="thead-dark">
+					<tr>
+						<!--						<th>User ID</th>-->
+						<th>E-mail</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Phone_No</th>
+						<th>Roles</th>
+						<th>Gender</th>
+						<th>Department</th>
+						<!--						<th>Organization</th>-->
+
+						<th>Edit</th>
+						<th>Delete</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="user: ${listUsers}"
+						th:if="${user.organization.organization_id} == ${loggedUser.organization.organization_id}">
+						<!--						<td th:text="${user.id}">User ID</td>-->
+						<td th:text="${user.email}">E-mail</td>
+						<td th:text="${user.firstName}">First Name</td>
+						<td th:text="${user.lastName}">Last Name</td>
+						<td th:text="${user.phone}">Phone Number</td>
+						<td th:text="${user.roles}">Roles</td>
+						<td th:text="${user.gender}">Gender</td>
+						<td th:text="${user.department}">Department</td>
+						<!--						<td th:text="${user.organization.organization_name}">Organization Name</td>-->
+
+						<td>
+							<a th:if="${user.id} != ${loggedUser.id}" th:href="@{'/users/edit/' + ${user.id}}"
+							   onclick="return confirm('Are you sure you want to edit the Users details?')">
+								<button style='font-size:14px;color:blue'>Edit
+									<i class='fas fa-edit'></i>
+								</button>
+							</a>
+							<a th:if="${user.id} == ${loggedUser.id}" th:href="@{/profile1}">
+								<button style='font-size:14px;color:blue'>Edit
+									<i class='fas fa-edit'></i>
+								</button>
+								<!--								<b style='font-size:14px;color:blue'-->
+								<!--								th:if="${user.id} == ${loggedUser.id}">Current User</b></a>-->
+
+						</td>
+						<td>
+							<a th:if="${user.id} != ${loggedUser.id}" th:href="@{'/delete_user/' + ${user.id}}"
+							   onclick="return confirm('Are you sure you want to delete the User?')">
+								<button style='font-size:14px;color:red'>Delete
+									<i class='far fa-trash-alt'></i>
+								</button>
+							</a>
+							<a><b style='font-size:14px;color:red'
+								  th:if="${user.id} == ${loggedUser.id}">N/A</b></a>
+
+						</td>
+
+
+
+					</tr>
+					</tbody>
+
+				</table>
+				<br>
+				<button><a th:href="@{/register}" style="color:black">Add User</a></button>
+				<br>
+				<br>
+
+				<button sec:authorize="hasAnyAuthority('SUPER_USER')" ><a th:href="@{/listAllUsers}" style="color:black">ALL User's List</a></button>
+			</div>
+
+
+
+		</div>
+	</div>
+
+</div>
+</body>
+
+<div th:replace="admin/admin::My_footer"></div>
+
+
+</html>

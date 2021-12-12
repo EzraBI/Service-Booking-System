@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Office Meetings Planner</title>
+
+	<!--    Footer Social Media Icons-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+
+	<link th:href="@{/css/welcome/bootstrap.css}" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400">
+
+	<!--	Labels and text boxes in the same line-->
+	<!--	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />-->
+
+
+</head>
+
+<body style="background-color: #b0e0e6">
+
+<!--Navbar-->
+<div th:replace="admin/admin::navbar"></div>
+<!--End of Navbar-->
+
+
+
+<div class="main-section">
+
+	<h3><b>Edit User</b> </h3>
+
+	<div class="container text-center">
+
+		<form th:action="@{/users/save}"
+			  th:object="${user}"
+			  method="post" style="max-width: 600px; margin: 0 auto;">
+			<input type="hidden" th:field="*{id}" />
+			<div class="m-3">
+				<div class="form-group row">
+					<label class="label">E-mail: </label>
+					<div class="col-8">
+						<input type="email" th:field="*{email}" class="form-control" required />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="label">Password: </label>
+					<div class="col-8">
+						<input type="password" th:field="*{password}" class="form-control"
+							   minlength="4" maxlength="20"/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="label">First Name: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{firstName}" class="form-control"
+							   required minlength="2" maxlength="20"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="label">Last Name: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{lastName}" class="form-control"
+							   required minlength="2" maxlength="20" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="label">Gender: </label>
+					<div class="col-8">
+						<input type="radio" th:field="*{gender}" value="Male" />Male
+						<input type="radio" th:field="*{gender}" value="Female" />Female<br/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="label">Department: </label>
+					<div class="col-8">
+						<select th:field="*{department}">
+							<option th:each="p : ${listDepartment}" th:value="${p}" th:text="${p}"/>
+						</select>
+					</div>
+				</div>
+
+
+
+				<div class="form-group row">
+					<label class="label">Phone_No: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{phone}" class="form-control"
+							   required minlength="3" maxlength="12" />
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label class="label">Roles: </label>
+					<div class="col-8">
+						<select th:field="*{roles}">
+							<option th:each="roles : ${listRoles}" th:value="${roles.id}" th:text="${roles.name}"/>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="label">Organizations: </label>
+					<div class="col-8">
+						<th:block th:each="organization: ${listOrganization}">
+							<input type="radio" th:field="*{organization}"
+								   th:text="${organization.organization_name}" th:value="${organization.organization_id}" class="m-2" />
+						</th:block>
+					</div>
+				</div>
+
+
+				<div>
+					<button type="submit" class="btn btn-primary">Update</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+	<br>
+	<button><a th:href="@{/ListUsers}" style="color:black">User's List</a></button>
+	<br>
+	<br>
+	<button sec:authorize="hasAnyAuthority('SUPER_USER')" ><a th:href="@{/listAllUsers}" style="color:black">ALL User's List</a></button>
+
+
+</div>
+
+
+
+</body>
+
+
+<div th:replace="admin/admin::My_footer"></div>
+
+
+</html>

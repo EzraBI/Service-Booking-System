@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/contact.css}" rel="stylesheet"/>
+    <link th:href="@{/css/welcome/bootstrap.css}" rel="stylesheet"/>
+
+    <!--    Footer Social Media Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous" />
+
+</head>
+<!--Navbar-->
+<div th:replace="admin/admin::navbar"></div>
+<!--Navbar-->
+<body style="background-color: #b0e0e6">
+<div class="main-section">
+
+
+<div class="container1">
+    <div class="content">
+        <div class="left-side">
+            <div class="address details">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="topic">Address</div>
+                <div class="text-one">Springette office park,</div>
+                <div class="text-two">Nairobi - Kenya</div>
+            </div>
+            <div class="phone details">
+                <i class="fas fa-phone-alt"></i>
+                <div class="topic">Phone</div>
+                <div class="text-one">+254 20 242 9692</div>
+                <!--				<div class="text-two">+0096 3434 5678</div>-->
+            </div>
+            <div class="email details">
+                <i class="fas fa-envelope"></i>
+                <div class="topic">Email</div>
+                <div class="text-one">info@officeplanner.com</div>
+                <!--				<div class="text-two">info.codinglab@gmail.com</div>-->
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="topic-text">Send us a message</div>
+            <p>If you have any query for us, you can send us a message from here. It's our pleasure to help you.</p>
+            <form th:action="@{/save_contact}"
+                  method="post"
+                  onSubmit="if(!confirm('Do you want to Send your message?')){return false;}"
+                  style="max-width: 600px; margin: 0 auto;"
+                  th:object="${contactUs}">
+                <div class="input-box">
+                    <input type="text" placeholder="Enter your name"
+                           field="*{contacts_name}" required />
+
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Phone Number"
+                           field="*{contacts_phone}" />
+
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Email"
+                           field="*{contacts_email}"/>
+                </div>
+                <div class="input-box message-box">
+                    <input type="text" class="message-box" placeholder="Message"
+                           field="*{message}"/>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Send Now" >
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+</body>
+<div th:replace="admin/admin::My_footer"></div>
+</html>

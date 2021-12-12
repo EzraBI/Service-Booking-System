@@ -1,0 +1,89 @@
+<!--<div  sec:authorize="hasAnyAuthority('ADMIN')" >-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Meeting Planner </title>
+    <!--	<link rel="stylesheet" type="text/css" href="css/reset.css">-->
+    <!--	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">-->
+    <link th:href="@{/css/welcome/bootstrap.css}" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400">
+<!--    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
+<!--    <script type="text/javascript" src="js/menuresponsive.js"></script>-->
+
+<!--    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <!--    Footer Social Media Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous" />
+
+
+</head>
+<body style="background-color: #b0e0e6">
+
+<!--Navbar-->
+<div th:replace="admin/admin::navbar"></div>
+<!--Navbar-->
+
+<div>
+    <div >
+        <div class="main-section">
+
+            <h3> <b>Edit Organization</b></h3>
+            <!--            <h4><b><a type="button" class="create-user-btn btn-sm btn btn-primary"-->
+            <!--                      th:href="@{/add_room}">Add Venue</a></b></h4>-->
+
+            <div>
+                <div class="container text-center">
+
+                    <form th:action="@{/saveOrganization}" method="post"
+                          onSubmit="if(!confirm('Do you want to Save Organization?'))
+    {return false;}"
+                          style="max-width: 600px; margin: 0 auto;"
+                          th:object="${edit_org}">
+
+                        <div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-4">Organization Id:</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" th:field="*{organization_id}" required readonly/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-4">Organization Name:</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" th:field="*{organization_name}" required/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Edit Organization</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+</div>
+</body>
+
+<div th:replace="admin/admin::My_footer"></div>
+
+
+</html>

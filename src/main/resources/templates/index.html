@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Salon Booking</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+	<link th:href="@{/css/welcome/landingpage.css}" rel="stylesheet"/>
+	<link th:href="@{/css/welcome/bootstrap.css}" rel="stylesheet"/>
+	<!--    Footer Social Media Icons-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+
+</head>
+<!--Navbar-->
+<div th:replace="admin/admin::navbar"></div>
+<!--End of Navbar-->
+<body style="background-color: #b0e0e6">
+<div class="wrapper">
+	<div class="pattern"></div>
+
+	<div class="main-section">
+		<div class="container d-flex flex-column" >
+			<h2><i><b>WELCOME TO SALON BOOKING PLATFORM.</b></i></h2>
+			<h3 sec:authorize="isAnonymous()" style="color: #b21f2d">
+				<i><b>Please Login to access all the information!</b></i></h3>
+		</div>
+	</div>
+
+	<div class="box-1 box"></div>
+	<div class="box-2 box"></div>
+	<div class="box-3 box"></div>
+
+	<div class="title-3">Services</div>
+	<div class="title-2">& Salon</div>
+
+	<!-- <div class="runner">
+          <img src="im111.jpg" alt="">
+    </div> -->
+
+	<div class="title-1">Booking</div>
+
+	<div class="content">
+		<!-- <h4>Welcome to Meeting Planner. </h4><br> -->
+		<h4>This is a platform for Booking Saloon Services and viewing the list of Booked Services. </h4>
+
+	</div>
+
+</div>
+
+<script type="text/javascript" src="/js/main.js">
+</script>
+</body>
+<div th:replace="admin/admin::My_footer"></div>
+</html>

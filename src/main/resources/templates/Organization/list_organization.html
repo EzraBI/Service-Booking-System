@@ -1,0 +1,94 @@
+<!--<div  sec:authorize="hasAnyAuthority('ADMIN')" >-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Meeting Planner </title>
+    <!--	<link rel="stylesheet" type="text/css" href="css/reset.css">-->
+    <!--	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">-->
+    <link th:href="@{/css/welcome/bootstrap.css}" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/menuresponsive.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--    Footer Social Media Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous" />
+
+
+</head>
+<body style="background-color: #b0e0e6">
+
+<!--Navbar-->
+<div th:replace="admin/admin::navbar"></div>
+<!--Navbar-->
+
+<div>
+    <div >
+        <div class="main-section">
+
+            <h3> <b>Boardroom List</b></h3>
+            <!--            <h4><b><a type="button" class="create-user-btn btn-sm btn btn-primary"-->
+            <!--                      th:href="@{/add_room}">Add Venue</a></b></h4>-->
+
+            <div>
+                <table class="My_table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <!--                        <th>Organization ID</th>-->
+                        <th>Organization Name</th>
+                        <!--                        <th>Boardroom Name</th>-->
+
+                        <div  sec:authorize="hasAnyAuthority('ADMIN', 'SUPER_USER')" >
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </div>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="organization: ${listOrg}">
+                        <!--                        <td th:text="${organization.organization_id}">Organization ID</td>-->
+                        <td th:text="${organization.organization_name}">Organization Name</td>
+                        <!--                        <td th:text="${organization.boardrooms}">Boardroom Name</td>-->
+
+                        <td sec:authorize="hasAnyAuthority('ADMIN','SUPER_USER')">
+                            <a th:href="@{'/edit_org/' + ${organization.organization_id}}"
+                               onclick="return confirm('Are you sure you want to edit the Organization details?')">
+                                <button style='font-size:16px;color:blue'>Edit
+                                    <i class='fas fa-edit'></i>
+                                </button>
+                            </a>
+                        </td>
+
+                        <td sec:authorize="hasAnyAuthority('ADMIN','SUPER_USER')">
+                            <a th:href="@{'/delete_org/' + ${organization.organization_id}}"
+                               onclick="return confirm('Are you sure you want to delete the Organization?')">
+                                <button style='font-size:16px;color:red'>Delete
+                                    <i class='far fa-trash-alt'></i>
+                                </button>
+                            </a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+
+                    </tbody>
+                </table>
+            </div>
+          <br>
+            <button> <a th:href="@{/add_org}" style="color:black">Add Organization</a> </button>
+
+
+
+        </div>
+    </div>
+
+</div>
+</body>
+
+<div th:replace="admin/admin::My_footer"></div>
+
+
+</html>
