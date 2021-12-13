@@ -1,7 +1,5 @@
 package net.salon.booking.User;
 
-import net.salon.booking.Category.Category;
-import net.salon.booking.Category.CategoryService;
 import net.salon.booking.Role.Role;
 import net.salon.booking.Role.RoleRepository;
 import net.salon.booking.Role.RoleService;
@@ -23,9 +21,6 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private CategoryService categoryService;
-
-	@Autowired
 	private RoleService roleService;
 
 	@Autowired
@@ -40,22 +35,11 @@ public class UserController {
 
 	@GetMapping("/register") //ADD USER
 	public String showRegistrationForm(Model model) {
-//		String email = loggedUser.getUsername();
-//		User user = service.getUserByEmail(email);
-
-
-//		int organizationId = user.getOrganization().getOrganizationId();
 
 		model.addAttribute("user", new User());
 
-		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
-		model.addAttribute("listDepartment", listDepartment);
-
 		List<Role> listRoles = service.listRoles();
 		model.addAttribute("listRoles", listRoles);
-
-		List<Category> listCategory = categoryService.listOrganization();
-		model.addAttribute("listOrganization", listCategory);
 
 		return "User/signup_form";
 	}
@@ -124,13 +108,6 @@ public class UserController {
 		List<Role> listRoles = service.listRoles();
 		model.addAttribute("listRoles", listRoles);
 
-		List<Category> listCategory = categoryService.listOrganization();
-		model.addAttribute("listOrganization", listCategory);
-
-
-		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
-		model.addAttribute("listDepartment", listDepartment);
-
 		List<User> listUsers = service.listAll();
 		model.addAttribute("listUsers", listUsers);
 
@@ -158,17 +135,9 @@ public class UserController {
 		String email = loggedUser.getUsername();
 		User user = service.getUserByEmail(email);
 
-
-
 		int users = service.noOfUsers();
 
-		int organizations = categoryService.noOfOrg();
-
-
 		model.addAttribute("noOfUsers", users);
-
-		model.addAttribute("noOfOrg", organizations);
-
 
 		return "Admin/admin";
 	}
@@ -186,22 +155,11 @@ public class UserController {
 		return "User/login";
 	}
 
-//	@GetMapping(path = "/profile")
-//	public String getProfilePage(){
-//		return "User/profile";
-//	}
 
 	@GetMapping(path = "/edit_profile")
 	public String getUserProfile1(@AuthenticationPrincipal CustomUserDetails loggedUser, Model model){
 		String email = loggedUser.getUsername();
 		User user = service.getUserByEmail(email);
-
-		List<Category> listCategory = categoryService.listOrganization();
-		model.addAttribute("listOrganization", listCategory);
-
-
-		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
-		model.addAttribute("listDepartment", listDepartment);
 
 		List<Role> listRoles = service.listRoles();
 		model.addAttribute("listRoles", listRoles);
@@ -216,13 +174,6 @@ public class UserController {
 		String email = loggedUser.getUsername();
 		User user = service.getUserByEmail(email);
 
-		List<Category> listCategory = categoryService.listOrganization();
-		model.addAttribute("listOrganization", listCategory);
-
-
-		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
-		model.addAttribute("listDepartment", listDepartment);
-
 		model.addAttribute("loggedUser", user);
 		return "User/profile1";
 	}
@@ -233,16 +184,8 @@ public class UserController {
 		loggedUser.setLastName(user.getLastName());
 		loggedUser.setEmail(user.getEmail());
 		loggedUser.setPhone(user.getPhone());
-		loggedUser.setOrganization(user.getOrganization());
 
 		loggedUser.setPassword(user.getPassword());
-
-		List<Category> listCategory = categoryService.listOrganization();
-		model.addAttribute("listOrganization", listCategory);
-
-
-		List<String> listDepartment = Arrays.asList("Finance", "ICT", "Human Resource", "Accounting and Finance","Purchasing","Marketing");
-		model.addAttribute("listDepartment", listDepartment);
 
 		model.addAttribute("loggedUser", user);
 

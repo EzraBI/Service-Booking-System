@@ -1,6 +1,6 @@
 package net.salon.booking.User;
 
-import net.salon.booking.Category.Category;
+
 import net.salon.booking.Role.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -85,14 +85,6 @@ public class CustomUserDetails implements UserDetails {
 	}
 	public void setPhone(String phone){
 		this.user.setPhone(phone);
-	}
-
-
-	public String getOrganization(){
-		return user.getOrganization().getCategory_name();
-	}
-	public void setOrganization(Category category){
-		this.user.setOrganization(category);
 	}
 
 

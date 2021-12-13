@@ -1,8 +1,6 @@
 package net.salon.booking.User;
 
-import net.salon.booking.Category.Category;
 import net.salon.booking.Role.Role;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
@@ -47,12 +45,6 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "role_id")
 	)
 	private Set<Role> roles = new HashSet<>();
-
-
-	@ManyToOne
-	@NotBlank(message = "Organization is required")
-	@JoinColumn(name = "organization_id")
-	private Category category;
 
 	public Long getId() {
 		return id;
@@ -120,14 +112,6 @@ public class User {
 
 	public void addRole(Role role) {
 		this.roles.add(role);
-	}
-
-	public Category getOrganization() {
-		return category;
-	}
-
-	public void setOrganization(Category category) {
-		this.category = category;
 	}
 
 	public String getResetPasswordToken() {

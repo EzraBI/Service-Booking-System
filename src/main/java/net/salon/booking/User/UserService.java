@@ -1,7 +1,5 @@
 package net.salon.booking.User;
 
-import net.salon.booking.Category.Category;
-import net.salon.booking.Category.CategoryRepository;
 import net.salon.booking.Role.Role;
 import net.salon.booking.Role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,6 @@ public class UserService {
 	
 	@Autowired
 	RoleRepository roleRepo;
-
-	@Autowired
-	private CategoryRepository categoryRepository;
 	
 	@Autowired PasswordEncoder passwordEncoder;
 
@@ -43,11 +38,6 @@ public class UserService {
 	public List<User> listAll() {
 		return userRepo.findAll();
 	}
-	public List<User> ShowUsersByOrg(int organization_id){
-		return userRepo.findAllUsersByOrganization(organization_id);
-	}
-
-
 	public List <User> listCoOwners(){
 		return userRepo.findAll();
 	}
@@ -60,15 +50,6 @@ public class UserService {
 		return roleRepo.findAll();
 	}
 
-
-	public Category get(Integer organization_id) {
-		return categoryRepository.findById(organization_id).get();
-	}
-
-	public List<Category> listOrganizations() {
-		return categoryRepository.findAll();
-	}
-	
 	public void save(User user) {
 		encodePassword(user);		
 		userRepo.save(user);
@@ -85,14 +66,6 @@ public class UserService {
 	public User getUserByEmail(String email) {
 		return userRepo.findByEmail(email);
 	}
-
-	public List<User> getUsersByOrganization(int organization_id) {
-		return userRepo.findAllUserWithOrganization(organization_id);
-	}
-
-		public List<User> getAllUsersByOrganization(int organization_id) {
-			return userRepo.findAllUsersByOrganization(organization_id);
-		}
 
 
 /** SETTING Token by checking users Email whether it exists, Setting token and SAVING user **/
