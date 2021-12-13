@@ -1,179 +1,141 @@
-<!--<div  sec:authorize="hasAnyAuthority('ADMIN')" >-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salon Booking System </title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Salon Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
 
-    <link th:href="@{/css/welcome/bootstrap.css}" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400">
-<!--    Footer Social Media Icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous" />
+    <link th:href="@{/css/home/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/home/bootstrap.css}" rel="stylesheet"/>
 
-
+    <!--    Footer Social Media Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
 </head>
-<body style="background-color: #b0e0e6">
-
+<body>
+<!-- NAVBAR -->
 <div th:fragment="navbar">
-<header class="container" >
-    <nav class="navbar"  >
+    <nav class="navbar navbar-expand-md sec-color navbar-dark fixed-top">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-<!--                <a class="navbar-brand" href=""><b>Office Meeting Planner</b></a>-->
-                <h4 style="color:white; margin-top:0px"><b>Salon Booking System</b></h4>
-            </div>
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav">
-                    <li ><a  style="color:lawngreen" th:href="@{/}">Home</a></li>
-                    <li ><a  style="color:lightgreen" th:href="@{/admin}">Dashboard</a></li>
-                    <li class="divider"></li>
 
-                    <li class="dropdown">
-                        <a  class="dropdown-toggle">Services <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/list_room}">Book Service</a></li>
-                            <li ><a sec:authorize="hasAnyAuthority('ADMIN','SUPER_USER')" th:href="@{/add_room}">Add Venue</a></li>
-                        </ul>
+            <a th:href="@{/}"  class="navbar-brand mx-auto ml-xl-5"><h3>Online <span>Salon</span></h3></a>
+
+            <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto text-center">
+                    <li class="nav-item">
+                        <a href="services.html" class="btn text-light" style="background-color: orange">Book Now</a>
                     </li>
-<!--                    <li class="dropdown">-->
-<!--                        <a  class="dropdown-toggle">Organizations <b class="caret"></b></a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a th:href="@{/list_organization}">Organizations</a></li>-->
-<!--                            <li><a sec:authorize="hasAnyAuthority('ADMIN','SUPER_USER')" th:href="@{/add_org}" >Add Organization</a></li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
+                    <li class="nav-item">
+                        <a th:href="@{/}" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/admin}" class="nav-link">Services</a>
+                    </li>
 
-                    <li class="divider"></li>
+                    <li class="nav-item">
+                        <a th:href="@{/contact}"class="nav-link">Contact Us</a>
+                    </li>
 
-                    <li style="color:green"><a  style="color:lightgreen" th:href="@{/contact}">Contact Us</a></li>
-
-
-                    <li class="nav navbar-nav navbar-right"><a sec:authorize="isAnonymous()" th:href="@{/login}"  style="color:lightgreen" href=""> Login</a></li>
-
-                </ul>
-
-                <ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
-
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle"><span sec:authentication="principal.fullName" class="me-2"></span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/profile1}">Profile</a></li>
-                            <li>
-                                <b> <form   th:action="@{/logout}" method="post" class="">
-                                    <input class="dropdown-item ms-0" type="submit" value="Sign Out"/>
-                                </form></b></li>
-
-                        </ul>
+                    <li class="nav-item">
+                        <a sec:authorize="isAnonymous()" th:href="@{/login}"  class="nav-link"> Login / Register</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-</header>
+</div>
 </div>
 
-<div>
-
-    <div class="main-section">
-
-        <h3 sec:authorize="hasAnyAuthority('ADMIN', 'SUPER_USER')"
-            style="color:blue"><b>ADMIN DASHBOARD</b></h3>
-        <h3 sec:authorize="hasAnyAuthority('USER')"
-            style="color:blue"><b>USER'S DASHBOARD</b></h3>
-
-        <div class="dashbord dashbord-green">
-            <div class="icon-section">
-                <i class="fa fa-hourglass-start" aria-hidden="true"></i><br>
-                <small>Today's Services</small>
-                <b> <p style="color: #0d3fbe" th:text="${noOfTodayMeetings}"></p > </b>
-            </div>
-            <div class="detail-section">
-                <a th:href="@{/ListTodayMeetings}">More Info </a>
-            </div>
+<div class="container mt-5">
+    <h1 class="h2 pt-5 text-center">Select a Category</h1><br>
+    <div class="row">
+        <div class="col">
+            <a href="#" id="hair">
+                <img alt="image" src="images/salon_service/hair.jpg" class="w-100 bigserviceimages">
+                <div class="centered">Hair</div>
+            </a>
         </div>
-
-        <div  class="dashbord dashbord-skyblue">
-            <div class="icon-section">
-                <i class="fa fa-book" aria-hidden="true"></i><br>
-                <small>Upcoming </small>
-                <b> <p style="color: greenyellow" th:text="${noOfUpcomingMeetings}"></p> </b>
-            </div>
-            <div class="detail-section">
-                <a th:href="@{/ListUpcomingMeetings}">More Info </a>
-            </div>
+        <div class="col">
+            <a href="#" id="beauty">
+                <img alt="image" src="images/salon_service/facial.jpg" class="w-100 bigserviceimages">
+                <div class="centered">Beauty</div>
+            </a>
         </div>
-
-        <div class="dashbord dashbord-violet">
-            <div class="icon-section">
-                <i class="fa fa-bookmark" aria-hidden="true"></i><br>
-                <small>Past </small>
-                 <p style="color: #0d3fbe" th:text="${noOfPastMeetings}"></p>
-            </div>
-            <div class="detail-section">
-                <a th:href="@{/ListPastMeetings}">More Info </a>
-            </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col" >
+            <a href="#" id="handfeet">
+                <img alt="image" src="images/salon_service/handfeet2.jpg" class="w-100 bigserviceimages">
+                <div class="centered">Nails</div>
+            </a>
         </div>
-
-<!--        <div class="dashbord dashbord-blue">-->
-<!--            <div class="icon-section">-->
-<!--                <i class="fa fa-home" aria-hidden="true"></i><br>-->
-<!--                <small></small>-->
-<!--                <b> <p style="color: white" th:text="${noOfRooms}"></p> </b>-->
-<!--            </div>-->
-<!--            <div class="detail-section">-->
-<!--                <a th:href="@{/list_room}">More Info </a>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div sec:authorize="hasAnyAuthority('ADMIN', 'SUPER_USER')" class="dashbord dashbord-red">
-            <div class="icon-section">
-                <i class="fa fa-home" aria-hidden="true"></i><br>
-                <small>Category</small>
-                <b> <p style="color: #0d3fbe" th:text="${noOfOrg}"></p> </b>
-            </div>
-            <div class="detail-section">
-                <a href="#">More Info </a>
-            </div>
+        <div class="col">
+            <a href="#" id="makeup">
+                <img alt="image" src="images/salon_service/makeup2.jpg" class="w-100 bigserviceimages">
+                <div class="centered">MakeUp</div>
+            </a>
         </div>
-        <div sec:authorize="hasAnyAuthority('ADMIN', 'SUPER_USER')" class="dashbord">
-            <div class="icon-section">
-                <i class="fa fa-users" aria-hidden="true"></i><br>
-                <small>Total Users</small>
-                <p th:text="${noOfUsers}"></p>
+    </div>
+</div>
+
+<br>
+
+<!-- Services PopUP -->
+
+<div class="modal" id="serviceModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Services</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="detail-section">
-                <a th:href="@{/ListUsers}">More Info </a>
-                <b> <p4 style="color: #0d3fbe" th:href="@{/ListUsers}"></p4> </b>
+            <div class="modal-body">
+                <input type="text" class="form-control" id="serviceTitle" disabled><br>
+                <select id="selectContainer" class="form-control">
+
+                </select><br>
+                <div class="text-center" id="salon_results">
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn sec-color text-white" data-dismiss="modal">Close</button>
+                <button class="btn pri-color text-white" id="goButton">Go</button>
             </div>
         </div>
     </div>
-
 </div>
+
 </body>
+
 <div th:fragment="My_footer" style="margin-bottom:fixed">
-<footer class="My_footer" >
+    <footer class="My_footer" >
 
-    <div>
         <div>
-            <p>Salon Booking System, Copyright &copy; 2021</p>
-        </div>
+            <div>
+                <p>Salon Booking System, Copyright &copy; 2021</p>
+            </div>
 
-        <div class="social">
-            <a href="#"><i class="fab fa-github fa-2x"></i></a>
-            <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-            <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
-            <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+            <div class="social">
+                <a href="#"><i class="fab fa-github fa-2x"></i></a>
+                <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 </div>
 
+</div>
 
 </html>
