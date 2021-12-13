@@ -25,7 +25,7 @@ public class UserService {
 	public void registerDefaultUser(User user) {
 		Role roleUser = roleRepo.findByName("User");
 		user.addRole(roleUser);
-//		encodePassword(user);
+		encodePassword(user);
 		Optional<User>userByEmail = Optional.ofNullable(userRepo.findByEmail(user.getEmail()));
 		if (userByEmail.isPresent()){
 			throw new IllegalStateException("Account with the same email exists!");

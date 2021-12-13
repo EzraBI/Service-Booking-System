@@ -19,13 +19,13 @@
 
 
 </head>
-<body style="background-color: #b0e0e6">
 
 <!--Navbar-->
 <div th:replace="admin/admin::navbar"></div>
 <!--Navbar-->
+<body  style="background-color: #b0e0e6">
 
-<div>
+<div sec:authorize="hasAnyAuthority('ADMIN','SUPER_USER')">
 	<div >
 		<div class="main-section">
 
@@ -52,7 +52,6 @@
 					</thead>
 					<tbody>
 					<tr th:each="user: ${listUsers}">
-<!--						th:if="${user.category.organization_id} == ${loggedUser.category.organization_id}">-->
 						<!--						<td th:text="${user.id}">User ID</td>-->
 						<td th:text="${user.email}">E-mail</td>
 						<td th:text="${user.firstName}">First Name</td>
@@ -62,13 +61,13 @@
 						<td th:text="${user.gender}">Gender</td>
 
 						<td>
-							<a th:if="${user.id} != ${loggedUser.id}" th:href="@{'/users/edit/' + ${user.id}}"
+							<a th:href="@{'/users/edit/' + ${user.id}}"
 							   onclick="return confirm('Are you sure you want to edit the Users details?')">
 								<button style='font-size:14px;color:blue'>Edit
 									<i class='fas fa-edit'></i>
 								</button>
 							</a>
-							<a th:if="${user.id} == ${loggedUser.id}" th:href="@{/profile1}">
+							<a th:href="@{/profile1}">
 								<button style='font-size:14px;color:blue'>Edit
 									<i class='fas fa-edit'></i>
 								</button> </a>
@@ -93,7 +92,7 @@
 
 				</table>
 				<br>
-				<button><a th:href="@{/register}" style="color:black">Add User</a></button>
+				<button><a  th:href="@{/register}" style="color:black">Add User</a></button>
 				<br>
 				<br>
 

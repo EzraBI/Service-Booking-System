@@ -56,10 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	AuthenticationSuccessHandler successHandler;
 
-//	The WebSecurityConfig class is annotated with @EnableWebSecurity to enable
-//	Spring Security’s web security support and provide the Spring MVC integration.
-//	It also extends WebSecurityConfigurerAdapter and overrides a couple of its methods
-//	to set some specifics of the web security configuration.
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

@@ -54,7 +54,7 @@ public class UserController {
 			model.addAttribute("error", ex.getMessage());
 			return "User/signup_form";
 		}
-		return "User/add_user";
+		return "index";
 	}
 
 
